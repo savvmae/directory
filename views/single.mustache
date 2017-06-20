@@ -1,21 +1,33 @@
 <html>
     <head>
+        <link rel="stylesheet" href="./public/styles.css">
     </head>
         <body>
             <div class='user-wrapper'>
             <div class="info-container">
             <img class="round-pic" src={{avatar}}></img>
+            <div class="right-side-wrapper">
             <div class="big-name">{{name}}</div>
-            <div class="location">
-                {{#address.city}}<p>{{address.city}}, {{address.country}} {{#job}} {{job}}, {{company}} {{/job}} {{^job}} <p class='avail'> Available For Hire</p> {{/job}} </p>{{/address.city}}
+            <div class="flex-info">
+                {{#address.city}}<p>{{address.city}}, {{address.country}}</p><p class='left-border'> {{#job}} {{job}}, {{company}} {{/job}} {{^job}}</p> <p class='avail'> Available For Hire</p> {{/job}} </p>{{/address.city}}
 
                 {{^address.city}}<p>{{address.country}} {{#job}} {{job}}, {{company}} {{/job}}</p>{{/address.city}}
             </div>
-            <div class="contact">{{email}}{{phone}}</div>
-            <div>
-                {{#university}}<div class='edu'>Education<p>{{university}}</p></div>{{/university}}
-
-                <div class='skills'>Skills{{#skills}}<ul><li class='skills-list'>{{skills}}</li></ul></div>{{/skills}}
+            <div class="flex-info"><p>{{email}}</p><p class='left-border'>{{phone}}</p></div>
+            </div>
+            </div>
+            <div class='s-and-e'>
+                {{#university}}<div class='edu'><p class='title'>Education</p><p>{{university}}</p></div>{{/university}}
+            </div>
+                <div class='s-and-e'>
+                    <div class='skills'>
+                        <p class='title-skills'>Skills</p>
+                        <ul>{{#skills}}
+                            <li class='skills-list'>{{.}}</li>
+                        {{/skills}}</ul>
+                    </div>
+                 </div>
+            </div>
 
 
 
