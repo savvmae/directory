@@ -2,8 +2,23 @@
     <head>
     </head>
         <body>
-            
-            <p>{{name}}</p>
+            <div class='user-wrapper'>
+            <div class="info-container">
+            <img class="round-pic" src={{avatar}}></img>
+            <div class="big-name">{{name}}</div>
+            <div class="location">
+                {{#address.city}}<p>{{address.city}}, {{address.country}} {{#job}} {{job}}, {{company}} {{/job}} {{^job}} <p class='avail'> Available For Hire</p> {{/job}} </p>{{/address.city}}
+
+                {{^address.city}}<p>{{address.country}} {{#job}} {{job}}, {{company}} {{/job}}</p>{{/address.city}}
+            </div>
+            <div class="contact">{{email}}{{phone}}</div>
+            <div>
+                {{#university}}<div class='edu'>Education<p>{{university}}</p></div>{{/university}}
+
+                <div class='skills'>Skills{{#skills}}<ul><li class='skills-list'>{{skills}}</li></ul></div>{{/skills}}
+
+
+
             
         </body>
     
