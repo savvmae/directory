@@ -1,0 +1,39 @@
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0px;
+    font-family: sans-serif;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.user-container {
+    display: flex;
+    flex-direction: column;
+    width: calc(25% - 40px);
+    border: .5px solid gray;
+    margin: 20px;
+    padding: 10px;
+    height: 300px;
+    align-items: center;
+}
+.name {
+    color: #367DCA;
+    font-size: 26px;
+    font-weight: bolder;
+    margin: 0px;
+}
+.avail {
+    color: #D77F74;
+}
+.thumbnail {
+    width: 70%;
+    margin: auto;
+}
+.hired {
+    color: gray;
+}
