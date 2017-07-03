@@ -1,6 +1,6 @@
 const express = require('express');
-// const data = require('./data.js');
 const mustacheExpress = require('mustache-express');
+const bodyParser = require('body-parser');
 const mongo = require('mongodb');
 const MongoClient = require('mongodb').MongoClient, assert = require('assert');
 
@@ -9,7 +9,6 @@ var dbCall = function (db, callback) {
         callback(result);
     })
 };
-
 
 const app = express();
 
@@ -20,30 +19,68 @@ app.set('views', './views');
 app.set('view engine', 'mustache');
 
 app.use('/public', express.static('./public'));
+app.use(bodyParser.urlencoded());
 
 app.get('/', function (req, res) {
     MongoClient.connect('mongodb://localhost:27017/robots', function (err, db) {
         assert.equal(err, null);
         dbCall(db, function (result) {
-            res.render('index', { users: result });
+            var model = {users: result};
+            var countries = [];
+            for (i = 0; i < model.users.length; i++) {
+                if (countries.indexOf(model.users[i].address.country) === -1) {
+                    countries.push(model.users[i].address.country);
+                }
+            }   
+            res.render('index', { users: result , countries: countries}); 
+        })
+    })
+});
+
+app.post('/country', function (req, res) {
+    var country = req.body.country;
+    MongoClient.connect('mongodb://localhost:27017/robots', function (err, db) {
+        db.collection('users').find({ "address.country": country }).toArray(function (err, result) {
+            var model = {users: result};
+            var countries = [];
+            for (i = 0; i < model.users.length; i++) {
+                if (countries.indexOf(model.users[i].address.country) === -1) {
+                    countries.push(model.users[i].address.country);
+                }
+            }
+            res.render('index', { users: result, countries: countries });
         })
     })
 });
 
 app.get('/employed', function (req, res) {
-    
+
     MongoClient.connect('mongodb://localhost:27017/robots', function (err, db) {
-        db.collection('users').find({job: {$ne: null}}).toArray(function (err, result) {
-            res.render('index', { users: result });
+        db.collection('users').find({ job: { $ne: null } }).toArray(function (err, result) {
+            var model = {users: result};
+            var countries = [];
+            for (i = 0; i < model.users.length; i++) {
+                if (countries.indexOf(model.users[i].address.country) === -1) {
+                    countries.push(model.users[i].address.country);
+                }
+            }
+            res.render('index', { users: result, countries: countries });
         })
     })
 });
 
 app.get('/available', function (req, res) {
-    
+
     MongoClient.connect('mongodb://localhost:27017/robots', function (err, db) {
-        db.collection('users').find({ job : null }).toArray(function (err, result) {
-            res.render('index', { users: result });
+        db.collection('users').find({ job: null }).toArray(function (err, result) {
+            var model = {users: result};
+            var countries = [];
+            for (i = 0; i < model.users.length; i++) {
+                if (countries.indexOf(model.users[i].address.country) === -1) {
+                    countries.push(model.users[i].address.country);
+                }
+            }
+            res.render('index', { users: result, countries: countries });
         })
     })
 });

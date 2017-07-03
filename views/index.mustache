@@ -9,6 +9,14 @@
             <a class="nav" href="/employed"> Employed Robots </a>
             <a class="nav" href="/available"> Available for Hire </a>
         </div>
+        <form method="POST" action="/country">
+            <select name="country">
+                {{#countries}}
+                <option value="{{.}}">{{.}}</option>
+                {{/countries}}
+            </select>
+            <button type="submit">Search</button>
+        </form>
         <div class='wrapper'>
             {{#users}}
             <div class="user-container">
