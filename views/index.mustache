@@ -1,17 +1,25 @@
 <html>
-    <head>
-        <link rel="stylesheet" href="./public/styles.css">
-        <body>
-            <div class='wrapper'>
+
+<head>
+    <link rel="stylesheet" href="./public/styles.css">
+
+    <body>
+        <div class='filter'>
+            <a class="nav" href="/"> Home </a>
+            <a class="nav" href="/employed"> Employed Robots </a>
+            <a class="nav" href="/available"> Available for Hire </a>
+        </div>
+        <div class='wrapper'>
             {{#users}}
-            <div class="user-container">    
-            <img class="thumbnail" src={{avatar}}></img>
-            <a class="name" href="{{id}}">{{name}}</a>
-            {{#job}}<p class='hired'> {{job}}{{company}} </p>{{/job}}
-            {{^job}}<p class='avail'> Available for Hire</p>{{/job}}
+            <div class="user-container">
+                <img class="thumbnail" src={{avatar}}></img>
+                <a class="name" href="{{id}}">{{name}}</a> {{#job}}
+                <p class='hired'> {{job}}{{company}} </p>{{/job}} {{^job}}
+                <p class='avail'> Available for Hire</p>{{/job}}
             </div>
             {{/users}}
-            </div>
-        </body>
-    </head>
+        </div>
+    </body>
+</head>
+
 </html>
